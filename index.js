@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-// import connectDB from "./config/db.js";
+import connectDB from "./config/db.js";
 import authRouter from "./router/auth-router.js";
 
 
@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 // Connect to MongoDB once here
-// connectDB();
+connectDB();
 
 
 
