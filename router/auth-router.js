@@ -7,6 +7,7 @@ import signup from '../controllers/signUp.js';
 import login from '../controllers/login.js';
 import dashboard from '../controllers/dashboard.js';
 import logout from '../controllers/logout.js';
+import listing from '../controllers/post-listings.js';
 
 
 const router = express.Router();
@@ -20,6 +21,8 @@ router.post('/login', login);
 router.post('/logout', logout);
 
 router.get('/dashboard', verifyToken, dashboard);
+router.post('/post-listings', listing);
+
 
 
 export default router;
