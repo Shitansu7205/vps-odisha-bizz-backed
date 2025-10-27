@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import authRouter from "./router/auth-router.js";
@@ -15,7 +16,7 @@ const port = process.env.PORT || 8000;
 // Connect to MongoDB once here
 connectDB();
 
-
+app.use(cookieParser()); // ✅ very important
 
 app.use(cors({
     origin: process.env.FRONTEND_URL,
