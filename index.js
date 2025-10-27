@@ -29,6 +29,8 @@ app.use("/api/auth", authRouter);
 
 
 // Start server
-app.listen(port, () => {
-    console.log(`🚀 Server is running on port ${port}`);
+// Start server
+app.listen(8000, "127.0.0.1", () => {
+    console.log("Server running securely on 127.0.0.1:8000....");
 });
+
