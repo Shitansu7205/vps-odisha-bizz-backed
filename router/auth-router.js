@@ -15,6 +15,7 @@ const router = express.Router();
 
 router.get('/test', test);
 
+router.get('/check-auth', verifyToken, (req, res) => res.status(200).json({ message: "Authenticated" }));
 
 router.post('/signup', signup);
 router.post('/login', login);
