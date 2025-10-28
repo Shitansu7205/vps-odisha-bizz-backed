@@ -8,6 +8,9 @@ import login from '../controllers/login.js';
 import dashboard from '../controllers/dashboard.js';
 import logout from '../controllers/logout.js';
 import listing from '../controllers/post-listings.js';
+import getlistings from '../controllers/getlistings.js';
+import updatelisting from '../controllers/updatelisting.js';
+import deletelisting from '../controllers/deletelisting.js';
 
 
 const router = express.Router();
@@ -23,6 +26,10 @@ router.post('/logout', logout);
 
 router.get('/dashboard', verifyToken, dashboard);
 router.post('/post-listings', listing);
+router.get('/get-listings', verifyToken, getlistings);
+router.put('/update-listings/:id', verifyToken, updatelisting);
+router.delete('/delete-listings/:id',verifyToken, deletelisting);
+
 
 
 
