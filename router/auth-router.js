@@ -11,6 +11,7 @@ import listing from '../controllers/post-listings.js';
 import getlistings from '../controllers/getlistings.js';
 import updatelisting from '../controllers/updatelisting.js';
 import deletelisting from '../controllers/deletelisting.js';
+import getlistingscategory from '../controllers/getlistingscategory.js';
 
 
 const router = express.Router();
@@ -28,7 +29,8 @@ router.get('/dashboard', verifyToken, dashboard);
 router.post('/post-listings', listing);
 router.get('/get-listings', verifyToken, getlistings);
 router.put('/update-listings/:id', verifyToken, updatelisting);
-router.delete('/delete-listings/:id',verifyToken, deletelisting);
+router.delete('/delete-listings/:id', verifyToken, deletelisting);
+router.get('/get-category-listings/:category', getlistingscategory);
 
 
 

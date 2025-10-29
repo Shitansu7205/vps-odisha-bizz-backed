@@ -15,7 +15,7 @@ const updatelisting = async (req, res) => {
         } = req.body;
 
         // 🟢 Log incoming data (optional)
-        console.log("Updating listing:", listingId);
+        // console.log("Updating listing:", listingId);
 
         // 🟢 Find and update
         const updatedListing = await ProductListing.findByIdAndUpdate(

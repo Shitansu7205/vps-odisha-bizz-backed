@@ -20,6 +20,7 @@ const productListingSchema = new mongoose.Schema(
             instagram: { type: String },
             twitter: { type: String },
             linkedin: { type: String },
+            website: { type: String },
         },
 
 

@@ -9,5 +9,5 @@ const connectDB = async () => {
         process.exit(1); // Stop the server if DB fails
     }
 };
-
+    
 export default connectDB;
