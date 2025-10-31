@@ -2,6 +2,8 @@ import express from 'express';
 import test from '../controllers/test.js';
 
 import verifyToken from '../middleware/auth.js';
+import upload from "../middleware/multer.js";
+
 
 import signup from '../controllers/signUp.js';
 import login from '../controllers/login.js';
@@ -27,9 +29,9 @@ router.post('/login', login);
 router.post('/logout', logout);
 
 router.get('/dashboard', verifyToken, dashboard);
-router.post('/post-listings', listing);
+router.post('/post-listings', verifyToken, upload.single("image"), listing);
 router.get('/get-listings', verifyToken, getlistings);
-router.put('/update-listings/:id', verifyToken, updatelisting);
+router.put('/update-listings/:id', verifyToken, upload.single("image"), updatelisting);
 router.delete('/delete-listings/:id', verifyToken, deletelisting);
 router.get('/get-category-listings/:category', getlistingscategory);
 router.post('/lead-form', createLead);
