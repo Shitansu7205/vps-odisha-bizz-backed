@@ -15,6 +15,8 @@ import updatelisting from '../controllers/updatelisting.js';
 import deletelisting from '../controllers/deletelisting.js';
 import getlistingscategory from '../controllers/getlistingscategory.js';
 import { createLead, getLeads } from '../controllers/leadController.js';
+import forgotPassword from '../controllers/forgotPassword.js';
+import resetPassword from '../controllers/resetPassword.js';
 
 
 const router = express.Router();
@@ -27,6 +29,8 @@ router.get('/check-auth', verifyToken, (req, res) => res.status(200).json({ mess
 router.post('/signup', signup);
 router.post('/login', login);
 router.post('/logout', logout);
+router.post('/forgot-password', forgotPassword);
+router.post('/reset-password/:token', resetPassword);
 
 router.get('/dashboard', verifyToken, dashboard);
 router.post('/post-listings', verifyToken, upload.single("image"), listing);
