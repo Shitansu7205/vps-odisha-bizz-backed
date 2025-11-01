@@ -1,5 +1,6 @@
 import ProductListing from "../models/productListing.js";
 const getlistings = async (req, res) => {
+    // console.log("Request received....");
     try {
         const listings = await ProductListing.find();
         

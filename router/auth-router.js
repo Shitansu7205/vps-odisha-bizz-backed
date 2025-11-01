@@ -30,7 +30,7 @@ router.post('/logout', logout);
 
 router.get('/dashboard', verifyToken, dashboard);
 router.post('/post-listings', verifyToken, upload.single("image"), listing);
-router.get('/get-listings', verifyToken, getlistings);
+router.get('/get-listings', getlistings);
 router.put('/update-listings/:id', verifyToken, upload.single("image"), updatelisting);
 router.delete('/delete-listings/:id', verifyToken, deletelisting);
 router.get('/get-category-listings/:category', getlistingscategory);

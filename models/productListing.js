@@ -22,8 +22,10 @@ const productListingSchema = new mongoose.Schema(
             linkedin: { type: String },
             website: { type: String },
         },
+
         imageUrl: String,       // ✅ for Cloudinary URL
         imagePublicId: String,  // ✅ for Cloudinary ID
+        
         status: {
             type: String,
             enum: ["active", "pending", "inactive"],
