@@ -18,6 +18,7 @@ import { createLead, getLeads } from '../controllers/leadController.js';
 import forgotPassword from '../controllers/forgotPassword.js';
 import resetPassword from '../controllers/resetPassword.js';
 
+import { addComment , getCommentsByListing } from '../controllers/commentController.js'
 
 const router = express.Router();
 
@@ -41,6 +42,9 @@ router.get('/get-category-listings/:category', getlistingscategory);
 router.post('/lead-form', createLead);
 router.get('/lead-form', verifyToken, getLeads);
 
+
+router.post("/comments/add-comment", verifyToken, addComment);
+router.get("/comments/:listingId", getCommentsByListing);
 
 
 
