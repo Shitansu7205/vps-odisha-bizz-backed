@@ -17,6 +17,7 @@ import getlistingscategory from '../controllers/getlistingscategory.js';
 import { createLead, getLeads } from '../controllers/leadController.js';
 import forgotPassword from '../controllers/forgotPassword.js';
 import resetPassword from '../controllers/resetPassword.js';
+import getSingleListing from '../controllers/getSingleListing.js';
 
 import { addComment , getCommentsByListing } from '../controllers/commentController.js'
 
@@ -36,6 +37,8 @@ router.post('/reset-password/:token', resetPassword);
 router.get('/dashboard', verifyToken, dashboard);
 router.post('/post-listings', verifyToken, upload.single("image"), listing);
 router.get('/get-listings', getlistings);
+router.get("/get-listing/:id", getSingleListing);
+
 router.put('/update-listings/:id', verifyToken, upload.single("image"), updatelisting);
 router.delete('/delete-listings/:id', verifyToken, deletelisting);
 router.get('/get-category-listings/:category', getlistingscategory);

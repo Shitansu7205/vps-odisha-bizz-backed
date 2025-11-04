@@ -17,7 +17,7 @@ export const addComment = async (req, res) => {
 
         await comment.save();
 
-        console.log("✅ Comment added successfully:", comment);
+        // console.log("✅ Comment added successfully:", comment);
         res.status(201).json({ message: "Comment added successfully", comment });
     } catch (error) {
         console.error("❌ Error adding comment:", error);
