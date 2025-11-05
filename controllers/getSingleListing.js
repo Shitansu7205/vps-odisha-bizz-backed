@@ -2,14 +2,14 @@ import Comment from "../models/Comment.js";
 import ProductListing from "../models/productListing.js";
 const getSingleListing = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { slug } = req.params;
 
     // 1️⃣ Fetch listing
-    const listing = await ProductListing.findById(id);
+    const listing = await ProductListing.findOne({ slug });
     if (!listing) return res.status(404).json({ message: "Listing not found" });
 
     // 2️⃣ Fetch related comments
-    const comments = await Comment.find({ listing: id })
+    const comments = await Comment.find({ listing: listing._id })
       .populate("user", "name email") // show who posted
       .sort({ createdAt: -1 });
 
