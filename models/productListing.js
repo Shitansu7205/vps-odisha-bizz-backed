@@ -12,7 +12,7 @@ const productListingSchema = new mongoose.Schema(
         phone: { type: String, required: true },
 
         address: {
-            city: { type: String, required: true },
+            district: { type: String, required: true },
             state: { type: String, required: true },
             pincode: { type: String, required: true },
         },
@@ -43,6 +43,16 @@ const productListingSchema = new mongoose.Schema(
         timestamps: true, // adds createdAt & updatedAt automatically
     }
 );
+
+
+// ====== INDEXES ======
+// Compound index for fast filtering by district + category + status
+productListingSchema.index({ "address.district": 1, category: 1, status: 1 });
+
+// Optional: Text index for full-text search on category, title, description
+productListingSchema.index({ category: "text", title: "text", description: "text" });
+
+
 
 
 // Pre-save middleware to generate SEO-friendly slug

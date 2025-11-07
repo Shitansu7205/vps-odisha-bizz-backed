@@ -16,7 +16,7 @@ const listing = async (req, res) => {
       !category ||
       !email ||
       !phone ||
-      !address?.city ||
+      !address?.district ||
       !address?.state ||
       !address?.pincode
     ) {

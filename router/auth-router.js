@@ -21,6 +21,15 @@ import getSingleListing from '../controllers/getSingleListing.js';
 
 import { addComment, getCommentsByListing } from '../controllers/commentController.js'
 
+
+
+
+
+import getCategorySuggestions from '../controllers/getCategorySuggestions.js'
+import getAllListings from '../controllers/getAllListings.js';
+
+
+
 const router = express.Router();
 
 
@@ -48,6 +57,11 @@ router.get('/lead-form', verifyToken, getLeads);
 
 router.post("/comments/add-comment", verifyToken, addComment);
 router.get("/comments/:listingId", getCommentsByListing);
+
+
+
+router.get("/search-suggestions", getCategorySuggestions);
+router.get("/all-products", getAllListings);
 
 
 
