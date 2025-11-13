@@ -18,6 +18,7 @@ import { createLead, getLeads } from '../controllers/leadController.js';
 import forgotPassword from '../controllers/forgotPassword.js';
 import resetPassword from '../controllers/resetPassword.js';
 import getSingleListing from '../controllers/getSingleListing.js';
+import getAllListingsDashboard from '../controllers/getAllListingsDashboard.js';
 
 import { addComment, getCommentsByListing } from '../controllers/commentController.js'
 
@@ -62,6 +63,7 @@ router.get("/comments/:listingId", getCommentsByListing);
 
 router.get("/search-suggestions", getCategorySuggestions);
 router.get("/all-products", getAllListings);
+router.get("/all-products-dashboard", getAllListingsDashboard);
 
 
 

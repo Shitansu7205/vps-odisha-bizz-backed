@@ -41,6 +41,9 @@ const listing = async (req, res) => {
       imagePublicId,
     });
 
+    console.log("New listing created:", newListing);
+
+
     await newListing.save();
 
     return res.status(201).json({

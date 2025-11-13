@@ -1,6 +1,6 @@
 import ProductListing from "../models/productListing.js";
 const getlistings = async (req, res) => {
-    // console.log("Request received....");
+    
     try {
         const listings = await ProductListing.find();
         
@@ -9,6 +9,7 @@ const getlistings = async (req, res) => {
         console.error(err);
         res.status(500).json({ message: "Internal Server Error" });
     }
+    
 }
 
 export default getlistings

@@ -3,76 +3,92 @@ import slugify from "slugify";
 import shortid from "shortid";
 
 const productListingSchema = new mongoose.Schema(
-    {
-        title: { type: String, required: true, trim: true },
-        description: { type: String, required: true },
-        category: { type: String, required: true },
-        slug: { type: String, unique: true, lowercase: true },
-        email: { type: String, required: true, lowercase: true, trim: true },
-        phone: { type: String, required: true },
+  {
+    title: { type: String, required: true, trim: true },
+    description: { type: String, required: true },
+    category: { type: String, required: true },
+    slug: { type: String, unique: true, lowercase: true },
+    email: { type: String, required: true, lowercase: true, trim: true },
+    phone: { type: String, required: true },
 
-        address: {
-            district: { type: String, required: true },
-            state: { type: String, required: true },
-            pincode: { type: String, required: true },
-        },
-
-        socialMedia: {
-            facebook: { type: String },
-            instagram: { type: String },
-            twitter: { type: String },
-            linkedin: { type: String },
-            website: { type: String },
-        },
-
-        imageUrl: String,       // ✅ for Cloudinary URL
-        imagePublicId: String,  // ✅ for Cloudinary ID
-
-        status: {
-            type: String,
-            enum: ["active", "pending", "inactive"],
-            default: "pending",
-        },
-
-        owner: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User", // assuming you have a User model
-        },
+    address: {
+      district: { type: String, required: true },
+      state: { type: String, required: true },
+      pincode: { type: String, required: true },
     },
-    {
-        timestamps: true, // adds createdAt & updatedAt automatically
-    }
-);
 
+    socialMedia: {
+      facebook: { type: String },
+      instagram: { type: String },
+      twitter: { type: String },
+      linkedin: { type: String },
+      website: { type: String },
+    },
+
+    imageUrl: String, // ✅ for Cloudinary URL
+    imagePublicId: String, // ✅ for Cloudinary ID
+
+    status: {
+      type: String,
+      enum: ["active", "pending", "inactive"],
+      default: "pending",
+    },
+
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User", // assuming you have a User model
+    },
+  },
+  {
+    timestamps: true, // adds createdAt & updatedAt automatically
+  }
+);
 
 // ====== INDEXES ======
 // Compound index for fast filtering by district + category + status
 productListingSchema.index({ "address.district": 1, category: 1, status: 1 });
 
 // Optional: Text index for full-text search on category, title, description
-productListingSchema.index({ category: "text", title: "text", description: "text" });
-
-
-
+productListingSchema.index({
+  category: "text",
+  title: "text",
+  description: "text",
+});
 
 // Pre-save middleware to generate SEO-friendly slug
 productListingSchema.pre("save", async function (next) {
-    if (this.isModified("title")) {
-        const baseSlug = slugify(this.title, { lower: true, strict: true });
-
-        // Check for existing slugs and make unique if needed  
-        const existing = await mongoose.models.ProductListing.findOne({ slug: baseSlug });
-        if (existing && existing._id.toString() !== this._id.toString()) {
-            this.slug = `${baseSlug}-${shortid.generate()}`; // append short id  
-        } else {
-            this.slug = baseSlug;
-        }
-
+  // Normalize address data
+  if (this.address) {
+    if (this.address.state) {
+      this.address.state = this.address.state.trim().toLowerCase();
     }
-    next();
+    if (this.address.district) {
+      this.address.district = this.address.district.trim().toLowerCase();
+    }
+    if (this.address.pincode) {
+      this.address.pincode = this.address.pincode.trim();
+    }
+  }
+
+  if (this.category) {
+    this.category = this.category.trim().toLowerCase();
+  }
+
+  if (this.isModified("title")) {
+    const baseSlug = slugify(this.title, { lower: true, strict: true });
+
+    // Check for existing slugs and make unique if needed
+    const existing = await mongoose.models.ProductListing.findOne({
+      slug: baseSlug,
+    });
+    if (existing && existing._id.toString() !== this._id.toString()) {
+      this.slug = `${baseSlug}-${shortid.generate()}`; // append short id
+    } else {
+      this.slug = baseSlug;
+    }
+  }
+  next();
 });
-
-
 
 const ProductListing = mongoose.model("ProductListing", productListingSchema);
 
