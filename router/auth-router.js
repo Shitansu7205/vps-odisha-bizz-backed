@@ -61,6 +61,8 @@ router.get("/lead-form", verifyToken, getLeads);
 router.post("/comments/add-comment", verifyToken, addComment);
 router.get("/comments/:listingId", getCommentsByListing);
 
+
+// Get Router
 router.get("/search-suggestions", getCategorySuggestions);
 router.get("/all-products", getAllListings);
 router.get("/all-products-dashboard", verifyToken, getAllListingsDashboard);
